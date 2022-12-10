@@ -1,0 +1,14 @@
+
+.navlist{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.nav-link{
+    font-size: 1.2rem;
+    color: #fff;
+    text-decoration: none;
+    margin: 5px 15px;
+}
