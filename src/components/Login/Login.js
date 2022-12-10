@@ -1,6 +1,5 @@
 import React from 'react';
 import './Login.css';
-import { FormControl, FormHelperText, Input, InputLabel } from '@mui/material';
 import Navbar from '../Header/Navbar/Navbar';
 
 const Login = () => {
@@ -9,11 +8,13 @@ const Login = () => {
             <Navbar></Navbar>
 
             <div className="login-form">
-            <FormControl>
-                <InputLabel htmlFor="my-input">Email address</InputLabel>
-                <Input id="my-input" aria-describedby="my-helper-text" />
-                <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText>
-            </FormControl>
+                <form action="signIn" method='post'>
+                    <input type="text" placeholder='Enter your name' name='name' /><br />
+                    <input type="email" placeholder='Enter your email' name='email' /><br />
+                    <input type="password" placeholder='Enter password' name='password' /><br />
+                    <input type="submit" value='SignUp' />
+                    <p>Already have an account? <span>SignIn</span></p>
+                </form>
             </div>
         </div>
     );
