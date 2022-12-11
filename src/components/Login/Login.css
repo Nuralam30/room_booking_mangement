@@ -39,3 +39,14 @@ p span:hover{
     text-decoration: underline;  
 }
 
+.googleLogin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #dedede;
+    background-color: #cfcdcd;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
