@@ -18,10 +18,10 @@ const Login = () => {
             const user = {
                 name: res.userName,
                 email: res.email,
-                userImage: res.image
+                userImage: res.image,
+                isSignedIn: true
             }
             setLoggedInUser(user);
-            console.log(user)
         })
     }
 

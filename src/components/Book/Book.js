@@ -11,7 +11,7 @@ const Book = () => {
             
             <div className="rooms">
                 {
-                    rooms.map(ro => <Room room={ro}></Room>)
+                    rooms.map(ro => <Room key={ro.id} room={ro}></Room>)
                 }
             </div>
         </div>
