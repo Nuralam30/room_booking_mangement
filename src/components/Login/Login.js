@@ -1,20 +1,36 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './Login.css';
 import Navbar from '../Header/Navbar/Navbar';
 import GoogleIcon from '@mui/icons-material/Google';
 import { handleGoogleLogin, intializeUserLogin } from './firebaseLoginManager';
+import { UserContext } from '../../App';
 
 
 const Login = () => {
 
     intializeUserLogin();
+    
+    const [ loggedInUser, setLoggedInUser ] = useContext(UserContext);
+    
+    const googleSignIn = () =>{
+        handleGoogleLogin()
+        .then(res =>{
+            const user = {
+                name: res.userName,
+                email: res.email,
+                userImage: res.image
+            }
+            setLoggedInUser(user);
+            console.log(user)
+        })
+    }
 
     return (
         <div className='login'>
             <Navbar></Navbar>
 
             <div className="login-form">
-                <div className='googleLogin' onClick={handleGoogleLogin}> <GoogleIcon /><span>Login with Google</span></div>
+                <div className='googleLogin' onClick={googleSignIn}> <GoogleIcon /><span>Login with Google</span></div>
 
                 <form action="signIn" method='post'>
                     <input type="text" placeholder='Enter your name' name='name' /><br />

@@ -1,11 +1,11 @@
 import React from 'react';
-import Header from '../Header/Header';
+import Navbar from '../Header/Navbar/Navbar';
 import './Book.css';
 
 const Book = () => {
     return (
         <div>
-            <Header></Header>
+            <Navbar></Navbar>
             this is book
         </div>
     );
