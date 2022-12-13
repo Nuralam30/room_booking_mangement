@@ -7,30 +7,38 @@ import beachRoom from '../images/beach-room.jpg';
 export const rooms = [
     {
         id: 1,
-        room: 'Luxarious couple room',
+        roomName: 'Luxarious couple room',
         image: coupleRoom,
+        bed: '1',
         capacity: '2',
+        price: 120,
         feature: 'This room is mainly for couples who wants to book a luxurious room'
     },
     {
         id: 2,
-        room: 'Luxarious couple room',
+        roomName: 'Single room for people relaxation',
         image: singleRoom,
+        bed: '1',
         capacity: '1',
-        feature: 'This room is mainly for couples who wants to book a luxurious room'
+        price: 150,
+        feature: 'This room is booked by people who dont want to share bed or living single.'
     },
     {
         id: 3,
-        room: 'Luxarious couple room',
+        roomName: 'Beautiful family room',
         image: familyRoom,
-        capacity: '1',
-        feature: 'This room is mainly for couples who wants to book a luxurious room'
+        bed: '2',
+        capacity: '5',
+        price: 220,
+        feature: 'This room is mainly for family package. Couples and there kids can easily attach here'
     },
     {
         id: 4,
-        room: 'Luxarious couple room',
+        roomName: 'Couple room beside beach view',
         image: beachRoom,
+        bed: '1',
         capacity: '1',
+        price: 180,
         feature: 'This room is mainly for couples who wants to book a luxurious room'
     }
 ]
