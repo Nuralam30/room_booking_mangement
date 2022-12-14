@@ -50,3 +50,7 @@ p span:hover{
     cursor: pointer;
 }
 
+.toggleLogin{
+    margin-bottom: 20px;
+}
+
