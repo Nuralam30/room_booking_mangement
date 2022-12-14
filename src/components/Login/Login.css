@@ -51,6 +51,9 @@ p span:hover{
 }
 
 .toggleLogin{
-    margin-bottom: 20px;
+    margin-bottom: 20px !important;
+    background-color: #408ba1 !important;
+    color: #fff !important;
+    font-weight: 500 !important;
 }
 
