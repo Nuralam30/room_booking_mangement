@@ -5,18 +5,21 @@ import GoogleIcon from '@mui/icons-material/Google';
 import { handleGoogleLogin, handleUserSignIn, handleUserSignUp, intializeUserLogin } from './firebaseLoginManager';
 import { UserContext } from '../../App';
 import ToggleButton from '@mui/material/ToggleButton';
+import { useNavigate } from 'react-router-dom';
 
 
 const Login = () => {
 
     intializeUserLogin();
     
+    const navigate = useNavigate();
     const [ loggedInUser, setLoggedInUser ] = useContext(UserContext);
     const [ newUser, setNewUser ] = useState(false);
     const [ user, setUser ] = useState({
-        name: '',
-        email: '',
-        password: ''
+        isSignedIn : false,
+        name : '',
+        email : '',
+        password : ''
     })
 
     
@@ -57,13 +60,16 @@ const Login = () => {
             .then(res =>{
                 setUser(res);
                 setLoggedInUser(res);
+                navigate('/home');
             })
+            
         }
         if(!newUser && user.email && user.password){
             handleUserSignUp(user.email, user.password)
             .then(res =>{
                 setUser(res);
                 setLoggedInUser(res);
+                navigate('/home');
             })
         }
         

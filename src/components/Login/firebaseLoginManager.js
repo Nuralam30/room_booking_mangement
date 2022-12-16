@@ -1,6 +1,6 @@
 
 import { initializeApp } from "firebase/app";
-import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import firebaseConfig from "./firebaseConfig";
 
 
@@ -34,21 +34,31 @@ export const handleGoogleLogin = () =>{
 export const handleUserSignUp = (email, password) =>{
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-        // Signed in 
-        const user = userCredential.user;
-        // ...
-        console.log(user, 'logged in successfuly')
+    .then((res) => {
+        const newUserInfo = res.user;
+        return newUserInfo;
     })
     .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        // ..
         console.log(errorCode)
         console.log(errorMessage)
     });
 }
 
-export const handleUserSignIn = () =>{
 
+// FIREBASE USER SIGN IN
+export const handleUserSignIn = (email, password) =>{
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+    .then((res) => {
+        const newUserInfo = res.user;
+        return newUserInfo;
+    })
+    .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode)
+        console.log(errorMessage)
+    });
 }
