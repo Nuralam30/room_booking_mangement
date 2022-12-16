@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import './Login.css';
 import Navbar from '../Header/Navbar/Navbar';
 import GoogleIcon from '@mui/icons-material/Google';
-import { handleGoogleLogin, intializeUserLogin } from './firebaseLoginManager';
+import { handleGoogleLogin, handleUserSignIn, handleUserSignUp, intializeUserLogin } from './firebaseLoginManager';
 import { UserContext } from '../../App';
 import ToggleButton from '@mui/material/ToggleButton';
 
@@ -13,7 +13,7 @@ const Login = () => {
     
     const [ loggedInUser, setLoggedInUser ] = useContext(UserContext);
     const [ newUser, setNewUser ] = useState(false);
-    const [ currentUser, setCurrentUser ] = useState({
+    const [ user, setUser ] = useState({
         name: '',
         email: '',
         password: ''
@@ -44,15 +44,29 @@ const Login = () => {
             isFieldValid = passLength && isPasswordValid;
         }
         if(isFieldValid){
-            const newUserInfo = {...currentUser};
+            const newUserInfo = {...user};
             newUserInfo[e.target.name] = e.target.value;
-            setCurrentUser(newUserInfo)
+            setUser(newUserInfo)
         }
     }
 
     // form submit firebase user
     const handleFormSubmit = (e) =>{
-        console.log(currentUser)
+        if(newUser && user.email && user.password){
+            handleUserSignIn(user.email, user.password)
+            .then(res =>{
+                setUser(res);
+                setLoggedInUser(res);
+            })
+        }
+        if(!newUser && user.email && user.password){
+            handleUserSignUp(user.email, user.password)
+            .then(res =>{
+                setUser(res);
+                setLoggedInUser(res);
+            })
+        }
+        
         e.preventDefault();
     }
 
