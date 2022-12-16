@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../Header/Navbar/Navbar';
 import './Book.css';
-import { rooms } from './allData';
+import { allRooms } from './allRooms';
 import Room from './Room/Room';
 
 const Book = () => {
@@ -11,7 +11,7 @@ const Book = () => {
             
             <div className="rooms">
                 {
-                    rooms.map(ro => <Room key={ro.id} room={ro}></Room>)
+                    allRooms.map(ro => <Room key={ro.id} room={ro} showBookBtn={true}></Room>)
                 }
             </div>
         </div>

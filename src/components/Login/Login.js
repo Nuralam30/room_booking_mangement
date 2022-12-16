@@ -13,7 +13,7 @@ const Login = () => {
     
     const [ loggedInUser, setLoggedInUser ] = useContext(UserContext);
     const [ newUser, setNewUser ] = useState(false);
-    const [ user, setUser ] = useState({
+    const [ currentUser, setCurrentUser ] = useState({
         name: '',
         email: '',
         password: ''
@@ -44,15 +44,15 @@ const Login = () => {
             isFieldValid = passLength && isPasswordValid;
         }
         if(isFieldValid){
-            const newUserInfo = {...user};
+            const newUserInfo = {...currentUser};
             newUserInfo[e.target.name] = e.target.value;
-            setUser(newUserInfo)
+            setCurrentUser(newUserInfo)
         }
     }
 
     // form submit firebase user
     const handleFormSubmit = (e) =>{
-        console.log(user)
+        console.log(currentUser)
         e.preventDefault();
     }
 
@@ -63,15 +63,18 @@ const Login = () => {
             <div className="login-form">
                 <div className='googleLogin' onClick={googleSignIn}> <GoogleIcon /><span>Login with Google</span></div>
                
-                <ToggleButton className='toggleLogin' value="login" onClick= {() =>setNewUser(!newUser)}>{newUser ? 'Login' : 'Register'}</ToggleButton>
+                <span>Did you registered already?
+                    <ToggleButton className='toggleLogin' value="login" onClick= {() =>setNewUser(!newUser)}>{newUser ? 'Login' : 'Register'}</ToggleButton>
+                </span>
 
                 <form onSubmit={handleFormSubmit}>
                     {
-                        newUser && <input type="text" placeholder='Enter your name' name='name' />
+                        newUser && <input type="text" placeholder='Enter your name' name='name' onChange={handleFormValidate} required />
                     }
                     <br />
                     <input type="email" placeholder='Enter your email' name='email' onChange={handleFormValidate} /><br />
                     <input type="password" placeholder='Enter password' name='password' onChange={handleFormValidate} /><br />
+                    <label htmlFor="password" style={{color: 'red'}}>password must be at least 4 characters</label><br /><br />
                     <input type="submit" value='Submit' />
                 </form>
             </div>

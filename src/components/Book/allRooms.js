@@ -4,7 +4,7 @@ import familyRoom from '../images/family.jpg';
 import beachRoom from '../images/beach-room.jpg';
 
 
-export const rooms = [
+export const allRooms = [
     {
         id: 1,
         roomName: 'Luxarious couple room',

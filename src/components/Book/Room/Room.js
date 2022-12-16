@@ -6,8 +6,9 @@ import EscalatorWarningIcon from '@mui/icons-material/EscalatorWarning';
 import HotelIcon from '@mui/icons-material/Hotel';
 
 const Room = (props) => {
-    const { roomName, image, bed, capacity, price, feature } = props.room;
-    const [ loggedInUser, setLoggedInUser ] = useContext(UserContext);
+    const { room, showBookBtn } = props;
+    const { roomName, image, bed, capacity, price, feature } = room;
+    const [ loggedInUser ] = useContext(UserContext);
 
     const roomImage = {
         backgroundImage: `url(${image})`,
@@ -17,11 +18,13 @@ const Room = (props) => {
 
     const navigate = useNavigate();
     const handleBookRoom = () =>{
+        loggedInUser.isSignedIn = true;
+
         if(!loggedInUser.isSignedIn){
             navigate('/login');
         }
         else{
-            console.log('book room')
+            navigate('/room-details/'+roomName);
         }
     }
 
@@ -37,7 +40,9 @@ const Room = (props) => {
             
             <h3>{roomName}</h3>
             <p>{feature}</p>
-            <button onClick={handleBookRoom}>Book Now</button>
+            {
+                showBookBtn ? <button onClick={handleBookRoom}>Book Now</button> : ''
+            }
         </div>
     );
 };

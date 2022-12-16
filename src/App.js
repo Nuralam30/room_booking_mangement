@@ -8,7 +8,7 @@ import {
 import Home from './components/Home/Home';
 import Book from './components/Book/Book';
 import Login from './components/Login/Login';
-import PrivateRoute from './PrivateRoute';
+// import PrivateRoute from './PrivateRoute';
 import RoomDetails from './components/Book/RoomDetails/RoomDetails';
 
 
@@ -25,7 +25,8 @@ function App() {
         <Routes>
           <Route path='/' element={<Home></Home>}></Route>
           <Route path='/book' element={<Book></Book>}></Route>
-          <Route path='/room-details' element={<PrivateRoute><RoomDetails></RoomDetails></PrivateRoute>}></Route>
+          {/* <Route path='/room-details' element={<PrivateRoute><RoomDetails></RoomDetails></PrivateRoute>}></Route> */}
+          <Route path='/room-details/:roomName' element={<RoomDetails></RoomDetails>}></Route>
           <Route path='/login' element={<Login></Login>}></Route>
           <Route path="*" element={<Home></Home>} />
         </Routes>
