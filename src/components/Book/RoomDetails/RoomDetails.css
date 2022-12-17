@@ -1,0 +1,22 @@
+
+.room-details{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.date-choose{
+    display: flex !important;
+    flex-direction: row !important;
+}
+
+.pick-date{
+    max-width: 400px;
+    margin: 20px !important;
+}
+
+.confirm-book{
+    margin: 0 auto;
+}

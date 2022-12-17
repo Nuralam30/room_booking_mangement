@@ -3,8 +3,8 @@ import './Login.css';
 import GoogleIcon from '@mui/icons-material/Google';
 import { handleGoogleSignIn, handleGoogleSignOut, handleUserSignIn, handleUserSignUp, intializeUserLogin } from './firebaseLoginManager';
 import { UserContext } from '../../App';
-import ToggleButton from '@mui/material/ToggleButton';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { Button } from '@mui/material';
 
 
 const Login = () => {
@@ -95,12 +95,12 @@ const Login = () => {
         <div className='login'>
             <div className="login-form">
                 {
-                    loggedInUser.isSignedIn ? <button onClick={googleSignOut}>Sign Out</button> : 
+                    loggedInUser.isSignedIn ? <Button variant="contained" onClick={googleSignOut}>Sign Out</Button> : 
                     <div className='googleLogin' onClick={googleSignIn}> <GoogleIcon /><span>Login with Google</span></div>
                 }
                
                 <span>Did you registered already?
-                    <ToggleButton className='toggleLogin' value="login" onClick= {() =>setNewUser(!newUser)}>{newUser ? 'Login' : 'Register'}</ToggleButton>
+                    <Button className='toggleLogin' value="login" onClick= {() =>setNewUser(!newUser)}>{newUser ? 'Login' : 'Register'}</Button>
                 </span>
 
                 <form onSubmit={handleFormSubmit}>
