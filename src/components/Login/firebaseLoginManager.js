@@ -1,6 +1,6 @@
 
 import { initializeApp } from "firebase/app";
-import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import firebaseConfig from "./firebaseConfig";
 
 
@@ -10,17 +10,17 @@ export const intializeUserLogin = () =>{
 
 
 // FIREBASE GOOGLE SIGNIN 
-export const handleGoogleLogin = () =>{
+export const handleGoogleSignIn = () =>{
     const auth = getAuth();
     const provider = new GoogleAuthProvider();
 
     return signInWithPopup(auth, provider)
     .then((res) => {
-        const { displayName, email, photoURL } = res.user;
+        const { displayName, email } = res.user;
         const signedInUser = {
-            userName: displayName,
-            email: email,
-            image: photoURL
+            isSignedIn: true,
+            name: displayName,
+            email: email
         }
         return signedInUser;
     })
@@ -30,35 +30,51 @@ export const handleGoogleLogin = () =>{
 }
 
 
+// FIREBASE GOOGLE SIGN OUT
+export const handleGoogleSignOut = () =>{
+    const auth = getAuth()
+    return signOut(auth)
+    .then(res => {
+        const signedOutUser = {
+            isSignedIn : false,
+            name : '',
+            email : ''
+        }
+    return signedOutUser;
+    })
+    .catch( err => console.log(err))
+}
+
+
 // FIREBASE USER SIGNUP
-export const handleUserSignUp = (email, password) =>{
+export const handleUserSignUp = (name, email, password) =>{
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
     .then((res) => {
         const newUserInfo = res.user;
         return newUserInfo;
     })
-    .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode)
-        console.log(errorMessage)
-    });
+    .catch( err => {
+        var errMessage = err.message;
+        const newUserInfo = {};
+        newUserInfo.error = errMessage;
+        return newUserInfo;
+    })
 }
 
 
 // FIREBASE USER SIGN IN
 export const handleUserSignIn = (email, password) =>{
     const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
+    return signInWithEmailAndPassword(auth, email, password)
     .then((res) => {
-        const newUserInfo = res.user;
-        return newUserInfo;
+        const userSignIn = res.user;
+        return userSignIn;
     })
-    .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode)
-        console.log(errorMessage)
-    });
+    .catch(err =>{
+        var errMessage = err.message;
+        const userSignIn = {};
+        userSignIn.error = errMessage;
+        return userSignIn;
+    })
 }

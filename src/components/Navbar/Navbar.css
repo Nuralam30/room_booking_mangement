@@ -1,4 +1,7 @@
-
+.navbar{
+    min-height: 10vh;
+    width: 100%;
+}
 .navlist{
     display: flex;
     justify-content: center;
