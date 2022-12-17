@@ -4,7 +4,7 @@ import GoogleIcon from '@mui/icons-material/Google';
 import { handleGoogleSignIn, handleGoogleSignOut, handleUserSignIn, handleUserSignUp, intializeUserLogin } from './firebaseLoginManager';
 import { UserContext } from '../../App';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Button } from '@mui/material';
+import { Alert, Button, Snackbar, Stack } from '@mui/material';
 
 
 const Login = () => {
@@ -12,6 +12,7 @@ const Login = () => {
     intializeUserLogin();
     
     const [ loggedInUser, setLoggedInUser ] = useContext(UserContext);
+    const [open, setOpen] = React.useState(false);
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -91,8 +92,35 @@ const Login = () => {
         e.preventDefault();
     }
 
+
+    // success alert 
+    const handleClick = () => {
+        setOpen(true);
+      };
+    
+      const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen(false);
+      };
+    
+
     return (
         <div className='login'>
+            
+            <Stack spacing={2} sx={{ width: '100%' }}>
+                <Button variant="outlined" onClick={handleClick}>
+                    Open success snackbar
+                </Button>
+                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                    This is a success message!
+                    </Alert>
+                </Snackbar>
+            </Stack>
+            
             <div className="login-form">
                 {
                     loggedInUser.isSignedIn ? <Button variant="contained" onClick={googleSignOut}>Sign Out</Button> : 
