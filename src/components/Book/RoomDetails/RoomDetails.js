@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './RoomDetails.css';
 import { useParams } from 'react-router-dom';
 import { allRooms } from '../allRooms';
@@ -10,19 +10,46 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { Button } from '@mui/material';
+import { UserContext } from '../../../App';
 
 
 
 const RoomDetails = () => {
 
-    const { roomName } = useParams()
+    const { roomName } = useParams();
+    const [ loggedInUser ] = useContext(UserContext);
+
     const selectedRoom = allRooms.find(rm => rm.roomName === roomName);
 
-    const [checkIn, setCheckIn] = useState(dayjs(new Date()));
-    const [checkOut, setCheckOut] = useState(dayjs(new Date()));
+    const [selectedDate, setSelectedDate] = useState({
+        checkIn: new Date(),
+        checkOut: new Date()
+    });
+
+    const handleCheckInDate = (date) =>{
+        const newDate = {...selectedDate};
+        newDate.checkIn = date;
+        setSelectedDate(newDate);
+        console.log(loggedInUser)
+    }
+
+    const handleCheckOutDate = (date) =>{
+        const newDate = {...selectedDate};
+        newDate.checkOut = date;
+        setSelectedDate(newDate);
+    }
 
     const handleBookConfirm = () =>{
-        console.log(checkIn, checkOut)
+        const newBooking = { ...loggedInUser, ...selectedDate };
+        fetch('http://localhost:4000/addBooking', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(newBooking)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+        })
     }
 
     return (
@@ -35,21 +62,17 @@ const RoomDetails = () => {
                         <DesktopDatePicker
                         className="pick-date"
                         label="Check In Date"
-                        value={checkIn}
+                        value={selectedDate.checkIn}
                         minDate={dayjs('2022-01-01')}
-                        onChange={(newValue) => {
-                            setCheckIn(newValue);
-                        }}
+                        onChange={handleCheckInDate}
                         renderInput={(params) => <TextField {...params} />}
                         />
                         <DesktopDatePicker
                         className="pick-date"
                         label="Check Out Date"
-                        value={checkOut}
+                        value={selectedDate.checkOut}
                         minDate={dayjs('2022-01-01')}
-                        onChange={(newValue) => {
-                            setCheckOut(newValue);
-                        }}
+                        onChange={handleCheckOutDate}
                         renderInput={(params) => <TextField {...params} />}
                         />
                     </Stack>
