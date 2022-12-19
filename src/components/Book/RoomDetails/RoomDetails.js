@@ -11,6 +11,7 @@ import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { Button } from '@mui/material';
 import { UserContext } from '../../../App';
+import Bookings from '../../Bookings/Bookings';
 
 
 
@@ -79,6 +80,8 @@ const RoomDetails = () => {
                 </LocalizationProvider>
             </div>
             <Button variant="contained" onClick={handleBookConfirm} className="confirm-book">Confirm</Button>
+
+            <Bookings></Bookings>
         </div>
     );
 };
