@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import './Login.css';
 import GoogleIcon from '@mui/icons-material/Google';
-import { handleGoogleSignIn, handleGoogleSignOut, handleUserSignIn, handleUserSignUp, intializeUserLogin } from './firebaseLoginManager';
+import { handleGoogleSignIn, handleGoogleSignOut, handleUserSignIn, handleUserSignUp, intializeUserLogin, storeAuthToken } from './firebaseLoginManager';
 import { UserContext } from '../../App';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
@@ -29,8 +29,9 @@ const Login = () => {
 
     // redirect to previous page
     const handleRedirect = (res, redirect) =>{
-        setUser(res)
-        setLoggedInUser(res)
+        setUser(res);
+        setLoggedInUser(res);
+        storeAuthToken();
         if(redirect){
             navigate(from)
         }

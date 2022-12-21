@@ -1,6 +1,8 @@
 
+import * as firebase from "firebase/app";
 import { initializeApp } from "firebase/app";
 import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import "firebase/auth";
 import firebaseConfig from "./firebaseConfig";
 
 
@@ -77,4 +79,15 @@ export const handleUserSignIn = (email, password) =>{
         userSignIn.error = errMessage;
         return userSignIn;
     })
+}
+
+
+// FIREBASE JWT TOKEN
+export const storeAuthToken = () =>{ 
+    firebase.auth().currentUser.getIdToken(/* forceRefresh */ true)
+    .then(function(idToken) {
+        console.log(idToken)
+      }).catch(function(error) {
+        // Handle error
+      });
 }
