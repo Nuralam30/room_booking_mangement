@@ -10,7 +10,7 @@ const Bookings = () =>{
         fetch('http://localhost:4000/bookings?email='+loggedInUser.email)
         .then(res => res.json())
         .then(data => setBookings(data))
-    } , [])
+    } , [fetch])
 
     return(
         <div>

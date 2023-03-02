@@ -83,11 +83,11 @@ export const handleUserSignIn = (email, password) =>{
 
 
 // FIREBASE JWT TOKEN
-export const storeAuthToken = () =>{ 
-    firebase.auth().currentUser.getIdToken(/* forceRefresh */ true)
-    .then(function(idToken) {
-        console.log(idToken)
-      }).catch(function(error) {
-        // Handle error
-      });
-}
+// export const storeAuthToken = () =>{ 
+//     firebase.auth().currentUser.getIdToken(/* forceRefresh */ true)
+//     .then(function(idToken) {
+//         console.log(idToken)
+//       }).catch(function(error) {
+//         // Handle error
+//       });
+// }
